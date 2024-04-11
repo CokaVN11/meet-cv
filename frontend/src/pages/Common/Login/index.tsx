@@ -2,6 +2,8 @@ import { redirect } from "react-router-dom";
 import { useAppDispatch } from "libs/redux";
 import { setAuth } from "libs/redux/sliceAuth";
 import { useState } from "react";
+import { Title } from "components/Title";
+import './index.css'
 
 export const Login = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +15,10 @@ export const Login = () => {
     if (!email || !password) {
       return;
     }
-    const role = email === "candidate" ? "candidate" : "staff";
+    let role = null;
+    if (email === "candidate") role = "candidate";
+    else if (email === "company") role = "company";
+    else if (email === "staff") role = "staff";
     dispatch(setAuth({ token: "token", role }));
     // Redirect to home page
     redirect("/");
@@ -28,20 +33,7 @@ export const Login = () => {
         }}
       >
         {/* Title MEET CV */}
-        <div className="w-full flex justify-start items-center gap-3 ms-8 mt-3">
-          <svg
-            width="6"
-            height="39"
-            viewBox="0 0 6 39"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M3 0L3 39" stroke="#F8D442" strokeWidth="6" />
-          </svg>
-          <h1 className="text-4xl font-bold text-black uppercase self-start">
-            Meet CV
-          </h1>
-        </div>
+        <Title title="MEET CV" variant="large" />
 
         <div className="w-full flex flex-col justify-center items-center mt-10">
           <h2 className="text-2xl font-semibold text-black text-center uppercase">
@@ -52,9 +44,9 @@ export const Login = () => {
           </p>
 
           {/* Form */}
-          <div className="flex flex-col justify-center items-center mt-12 gap-4">
+          <div className="flex flex-col justify-center items-center mt-12 gap-4 w-full">
             {/* Username input with label */}
-            <div className="flex flex-col w-96">
+            <div className="flex flex-col w-full">
               <label
                 htmlFor="username"
                 className="text-sm font-medium text-black self-start"
@@ -64,7 +56,7 @@ export const Login = () => {
               <input
                 id="email"
                 type="text"
-                className="px-4 py-2 border border-gray-300 rounded-md mt-2 text-black"
+                className="input-form"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -72,7 +64,7 @@ export const Login = () => {
             </div>
 
             {/* Password input with label */}
-            <div className="flex flex-col w-96 mt-4">
+            <div className="flex flex-col w-full">
               <label
                 htmlFor="password"
                 className="text-sm font-medium text-black self-start"
@@ -82,7 +74,7 @@ export const Login = () => {
               <input
                 id="password"
                 type="password"
-                className="px-4 py-2 border border-gray-300 rounded-md mt-2 text-black"
+                className="input-form"
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -91,7 +83,7 @@ export const Login = () => {
 
             {/* Login button */}
             <button
-              className="px-4 py-2 bg-amber-500 text-white rounded-md mt-4 w-full uppercase"
+              className="px-4 py-2 bg-amber-500 text-white rounded-md mt-4 w-full uppercase focus:border-amber-200 focus:ring-amber-500 active:bg-amber-600"
               onClick={() => handleLogin()}
             >
               Sign in
