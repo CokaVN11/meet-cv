@@ -1,14 +1,21 @@
 {
+  "$schema": "https://turbo.build/schema.json",
   "pipeline": {
     "dev": {
-      "cache": false
-    },
-    "type-check": {
-      "outputs": []
+      "cache": false,
+      "persistent": true
     },
     "build": {
-      "dependsOn": ["type-check"],
-      "outputs": ["dist/**"]
-    }
+      "inputs": ["frontend/src/**"],
+      "outputs": ["frontend/dist/**"],
+      "dependsOn": ["lint", "test"]
+    },
+    "lint": {},
+    "pretty": {},
+    "pretty-fix": {
+      "cache": false,
+      "persistent": false
+    },
+    "test": {}
   }
 }
