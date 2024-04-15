@@ -24,7 +24,7 @@ export const Login = () => {
     redirect("/");
   };
   return (
-    <div className="bg-gradient-to-tr from-amber-500 to-yellow-300 h-screen w-screen flex justify-center items-center">
+    <div className="yellow-gradient h-screen w-screen flex justify-center items-center">
       <div
         className="bg-white flex flex-col mx-auto rounded-lg shadow-md my-auto p-8"
         style={{

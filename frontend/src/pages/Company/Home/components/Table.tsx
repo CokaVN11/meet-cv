@@ -7,183 +7,15 @@ import {
   Box,
   Checkbox,
   TableCell,
-  TableHead,
-  TableRow,
-  TableSortLabel,
+  TableRow
 } from "@mui/material";
-import { visuallyHidden } from "@mui/utils";
-import { useState, MouseEvent, useMemo } from "react";
+import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { useState, MouseEvent, useMemo, useEffect } from "react";
+import mockData from "../mockData.json";
+import { EnhancedTableHead } from "./EnhancedTableHead";
 type Order = "asc" | "desc";
 
-
-interface HeadCell {
-  disablePadding: boolean;
-  id: keyof ads;
-  label: string;
-  numeric: boolean;
-}
-
-const headCells: readonly HeadCell[] = [
-  {
-    id: "position",
-    numeric: false,
-    disablePadding: true,
-    label: "Position",
-  },
-  {
-    id: "quantity",
-    numeric: true,
-    disablePadding: false,
-    label: "Quantity",
-  },
-  {
-    id: "endTime",
-    numeric: true,
-    disablePadding: false,
-    label: "End date",
-  },
-  {
-    id: "adsForm",
-    numeric: true,
-    disablePadding: false,
-    label: "Advertisement form",
-  },
-  {
-    id: "description",
-    numeric: true,
-    disablePadding: false,
-    label: "Description",
-  },
-];
-
-interface EnhancedTableProps {
-  numSelected: number;
-  onRequestSort: (
-    event: React.MouseEvent<unknown>,
-    property: keyof ads
-  ) => void;
-  onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  order: Order;
-  orderBy: string;
-  rowCount: number;
-}
-
-const EnhancedTableHead = (props: EnhancedTableProps) => {
-  const {
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-  } = props;
-  const createSortHandler =
-    (property: keyof ads) => (event: React.MouseEvent<unknown>) => {
-      onRequestSort(event, property);
-    };
-
-  return (
-    <TableHead>
-      <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              "aria-label": "select all positions",
-            }}
-          />
-        </TableCell>
-        {headCells.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align={"left"}
-            padding={headCell.disablePadding ? "none" : "normal"}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : "asc"}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
-                </Box>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-  );
-}
-
-function createData(
-  id: number,
-  position: string,
-  quantity: number,
-  endTime: string,
-  adsForm: string,
-  description: string
-): ads {
-  return {
-    id,
-    position,
-    quantity,
-    endTime,
-    adsForm,
-    description,
-  };
-}
-
-const rows = [
-  createData(
-    1,
-    "Python Developer",
-    5,
-    "2022-10-01",
-    "Banner",
-    "Bachelor degree in Computer Science, Information Technology or related field"
-  ),
-  createData(
-    2,
-    "Java Developer",
-    5,
-    "2022-10-01",
-    "Banner",
-    "5+ years of experience in Java development"
-  ),
-  createData(
-    3,
-    "Frontend Developer",
-    5,
-    "2022-10-01",
-    "Banner",
-    "2+ years of experience in Frontend development"
-  ),
-  createData(
-    4,
-    "Backend Developer",
-    5,
-    "2022-10-01",
-    "Banner",
-    "2+ years of experience in Backend development"
-  ),
-  createData(
-    5,
-    "Fullstack Developer",
-    5,
-    "2022-10-01",
-    "Banner",
-    "2+ years of experience in Fullstack development"
-  ),
-];
-
-function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
+const descendingComparator = <T extends object>(a: T, b: T, orderBy: keyof T) => {
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -193,26 +25,21 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
-function getComparator<Key extends keyof unknown>(
-  order: Order,
-  orderBy: Key
-): (
-  a: { [key in Key]: number | string },
-  b: { [key in Key]: number | string }
-) => number {
-  return order === "desc"
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
+const getComparator = <T extends object>(order: Order, orderBy: keyof T): ((a: T, b: T) => number) => {
+  const multiplier = order === "desc" ? -1 : 1;
+  return (a: T, b: T) => {
+    return multiplier * descendingComparator(a, b, orderBy);
+  }
+};
 
 // Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
 // stableSort() brings sort stability to non-modern browsers (notably IE11). If you
 // only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
 // with exampleArray.slice().sort(exampleComparator)
-function stableSort<T>(
+const stableSort = <T extends object>(
   array: readonly T[],
   comparator: (a: T, b: T) => number
-) {
+) => {
   const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
@@ -230,9 +57,15 @@ export const CustomTable = () => {
   const [selected, setSelected] = useState<readonly number[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rows, setRows] = useState<ads[]>([]);
+
+  useEffect(() => {
+    // convert json to array
+    setRows(mockData);
+  }, []);
 
   const handleRequestSort = (
-    event: MouseEvent<unknown>,
+    _event: MouseEvent<unknown>,
     property: keyof ads
   ) => {
     const isAsc = orderBy === property && order === "asc";
@@ -249,21 +82,17 @@ export const CustomTable = () => {
     setSelected([]);
   };
 
-  const handleClick = (_event: React.MouseEvent<unknown>, id: number) => {
+  const handleClick = (_event: React.MouseEvent, id: number) => {
     const selectedIndex = selected.indexOf(id);
     let newSelected: readonly number[] = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
+      newSelected = [...selected, id];
+    } else {
+      newSelected = [
+        ...selected.slice(0, selectedIndex),
+        ...selected.slice(selectedIndex + 1),
+      ];
     }
     setSelected(newSelected);
   };
@@ -291,11 +120,11 @@ export const CustomTable = () => {
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
-    [order, orderBy, page, rowsPerPage]
+    [order, orderBy, page, rows, rowsPerPage]
   );
   return (
-    <Box sx={{ width: "100%", height: "100vh", backgroundColor: "#f0f0f0" }}>
-      <Paper sx={{ width: "100%", height: "100vh", mb: 2 }}>
+    <Box sx={{ width: "100%", backgroundColor: "#f0f0f0" }}>
+      <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -314,6 +143,7 @@ export const CustomTable = () => {
               {visibleRows.map((row, index) => {
                 const isItemSelected = isSelected(row.id);
                 const labelId = `enhanced-table-checkbox-${index}`;
+                const bgColor = row.status === "active" ? "bg-green-100 hover:!bg-green-200" : "bg-red-100 hover:!bg-red-200";
 
                 return (
                   <TableRow
@@ -325,6 +155,7 @@ export const CustomTable = () => {
                     key={row.id}
                     selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
+                    className={bgColor}
                   >
                     <TableCell padding="checkbox">
                       <Checkbox
@@ -336,6 +167,7 @@ export const CustomTable = () => {
                       />
                     </TableCell>
                     <TableCell
+                      align="left"
                       component="th"
                       id={labelId}
                       scope="row"
@@ -343,10 +175,15 @@ export const CustomTable = () => {
                     >
                       {row.position}
                     </TableCell>
-                    <TableCell align="left">{row.quantity}</TableCell>
-                    <TableCell align="left">{row.endTime}</TableCell>
-                    <TableCell align="left">{row.adsForm}</TableCell>
+                    <TableCell align="center">{row.quantity}</TableCell>
+                    <TableCell align="center">{row.endTime}</TableCell>
+                    <TableCell align="center">{row.adsForm}</TableCell>
                     <TableCell align="left">{row.description}</TableCell>
+                    {/* Action column */}
+                    <TableCell align="center">
+                      <button className="bg-transparent text-green-500 hover:border-none focus:outline-none hover:text-green-400 active:text-green-700"><PencilSquareIcon className="h-5 w-5"></PencilSquareIcon></button>
+                      <button className="bg-transparent text-rose-500 hover:border-none focus:outline-none hover:text-rose-400 active:text-rose-700"><TrashIcon className="h-5 w-5"></TrashIcon></button>
+                    </TableCell>
                   </TableRow>
                 );
               })}

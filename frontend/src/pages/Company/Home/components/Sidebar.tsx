@@ -67,13 +67,13 @@ export const Sidebar = () => {
         />
       </div>
 
-      <div className="flex flex-col items-center mt-40">
-      <SidebarButton
-        icon={
-          <ArrowLeftOnRectangleIcon className="h-5 w-5 me-1"></ArrowLeftOnRectangleIcon>
-        }
-        text="Log out"
-      />
+      <div className="flex flex-col items-center mb-1 mt-36">
+        <SidebarButton
+          icon={
+            <ArrowLeftOnRectangleIcon className="h-5 w-5 me-1"></ArrowLeftOnRectangleIcon>
+          }
+          text="Log out"
+        />
       </div>
     </div>
   );

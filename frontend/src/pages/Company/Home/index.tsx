@@ -6,8 +6,10 @@ export const CompanyHome = () => {
         <Sidebar />
         <div className="basic w-4/5">
           <Headerbar />
-          <Subbar />
-          <CustomTable />
+          <div className="px-10">
+            <Subbar />
+            <CustomTable />
+          </div>
         </div>
       </div>
     </div>

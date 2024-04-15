@@ -45,3 +45,7 @@
 .read-the-docs {
   color: #888;
 }
+
+.yellow-gradient {
+  @apply bg-gradient-to-tr from-amber-500 to-yellow-300;
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "position": "Python Developer",
+    "quantity": 5,
+    "endTime": "2022-10-01",
+    "adsForm": "Banner",
+    "description": "Bachelor degree in Computer Science, Information Technology or related field",
+    "status": "active"
+  },
+  {
+    "id": 2,
+    "position": "Java Developer",
+    "quantity": 5,
+    "endTime": "2022-10-01",
+    "adsForm": "Banner",
+    "description": "5+ years of experience in Java development",
+    "status": "active"
+  },
+  {
+    "id": 3,
+    "position": "Frontend Developer",
+    "quantity": 5,
+    "endTime": "2022-10-01",
+    "adsForm": "Banner",
+    "description": "2+ years of experience in Frontend development",
+    "status": "deactive"
+  },
+  {
+    "id": 4,
+    "position": "Backend Developer",
+    "quantity": 5,
+    "endTime": "2022-10-01",
+    "adsForm": "Banner",
+    "description": "2+ years of experience in Backend development",
+    "status": "active"
+  },
+  {
+    "id": 5,
+    "position": "Fullstack Developer",
+    "quantity": 5,
+    "endTime": "2022-10-01",
+    "adsForm": "Banner",
+    "description": "2+ years of experience in Fullstack development",
+    "status": "deactive"
+  }
+]

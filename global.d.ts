@@ -1,4 +1,5 @@
 type ads = {
+  status: string;
   id: number;
   position: string;
   quantity: number;
