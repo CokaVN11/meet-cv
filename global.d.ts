@@ -1,3 +1,6 @@
+// Utility types
+type ObjectValues<T> = T[keyof T]
+
 type ads = {
   status: string;
   id: number;

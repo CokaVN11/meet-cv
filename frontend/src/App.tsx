@@ -7,9 +7,10 @@ import {
   Outlet,
   redirect,
 } from "react-router-dom";
-import { CandidateHome, StaffHome, CompanyHome, Login } from "./pages";
+import { CandidateHome, StaffHome, Login, CompanyHome, CompanyLayout } from "./pages";
 import "./App.css";
 import { useAppSelector } from "./libs/redux";
+import { useMemo } from "react";
 
 const PrivateRoute = ({
   role,
@@ -18,7 +19,12 @@ const PrivateRoute = ({
   role: string | null;
   redirectPath?: string;
 }) => {
-  return role ? <Outlet /> : <Navigate to={redirectPath} replace />;
+  const layout = useMemo(() => {
+    if (role === "company") return <CompanyLayout />;
+    return <Outlet />;
+  }, [role]);
+
+  return role ? layout : <Navigate to={redirectPath} />;
 };
 
 const App = () => {
