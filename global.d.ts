@@ -20,6 +20,16 @@ type Ads = {
   description: string;
 }
 
+type Proposal = {
+  status: string;
+  id: number;
+  position: string;
+  quantity: number;
+  length: string;
+  startDate: string;
+  adsForm: string;
+}
+
 interface RowWithId {
   id: number;
   status?: string;
