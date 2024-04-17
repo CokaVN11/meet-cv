@@ -38,7 +38,7 @@ const SidebarButton = ({
     }
   }
   return (
-    <button className={`${active ? 'bg-amber-500 text-white hover:bg-amber-500': 'bg-transparent'} w-full hover:bg-amber-400 flex justify-start gap-2 items-center hover:border-amber-400 focus:outline-none focus:ring-amber-500 font-medium text-sm`} onClick={onClickHandler}>
+    <button className={`${active ? 'bg-amber-500 text-white hover:bg-amber-500': 'bg-transparent'} w-full hover:bg-amber-400 flex justify-start gap-2 items-center hover:border-amber-400 focus:outline-none focus:ring-amber-500 font-medium text-sm rounded-lg`} onClick={onClickHandler}>
       {icon}
       {text}
     </button>
