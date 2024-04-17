@@ -11,6 +11,7 @@ import { CandidateHome, StaffHome, Login, CompanyHome, CompanyLayout, CompanyPos
 import "./App.css";
 import { useAppSelector } from "./libs/redux";
 import { useMemo } from "react";
+import { CandidateApplied } from "pages/Candidate/Applied";
 
 const PrivateRoute = ({
   role,
@@ -40,10 +41,11 @@ const App = () => {
         <Route path="/login" loader={loginLoader} element={<Login />} />
         <Route path="/candidate" element={<PrivateRoute role={role} />}>
           <Route path="" element={<CandidateHome />} index />
-
+          <Route path="/candidate/applied" element={<CandidateApplied />} />
         </Route>
         <Route path="/staff" element={<PrivateRoute role={role} />}>
           <Route path="" element={<StaffHome />} index />
+          
         </Route>
         <Route path="/company" element={<PrivateRoute role={role} />}>
           <Route path="" element={<CompanyHome />} index />

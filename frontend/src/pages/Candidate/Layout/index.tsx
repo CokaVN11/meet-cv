@@ -2,22 +2,41 @@ import { FC } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Avatar, Dropdown } from "flowbite-react";
 import avatar from "assets/avatar.jpg";
-import { useAppDispatch } from "libs/redux";
+import { useAppDispatch, useAppSelector } from "libs/redux";
 import { clearAuth } from "libs/redux/sliceAuth";
+import { PageTitle } from "types/index";
+import { setCurrentPage } from "libs/redux/sliceCandidate";
 
 export const CandidateLayout: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { currentPage } = useAppSelector((state) => state.candidate);
+
+  const defaultNavClass =
+    "bg-transparent hover:text-amber-400 active:text-amber-500 text-black font-semibold py-2 lg:px-4 px-1 hover:border-transparent rounded";
+
   return (
     <div className="h-screen w-screen">
       {/* Header bar */}
       <div className="flex flex-row h-14 w-full items-center shadow-sm px-4 justify-between">
         <div className="flex flex-row items-center sm:space-x-4 w-1/2">
           <h1 className="sm:text-2xl text-md font-bold uppercase">Meet CV</h1>
-          <button className="bg-transparent hover:text-amber-400 active:text-amber-500 text-black font-semibold py-2 lg:px-4 px-1 hover:border-transparent rounded">
+          <button
+            className={`${defaultNavClass} ${currentPage === PageTitle.candidate.jobs ? "text-amber-400" : ""}`}
+            onClick={() => {
+              navigate("/candidate/jobs");
+              dispatch(setCurrentPage(PageTitle.candidate.jobs));
+            }}
+          >
             Jobs
           </button>
-          <button className="bg-transparent hover:text-amber-400 active:text-amber-500 text-black font-semibold py-2 lg:px-4 px-1 hover:border-transparent rounded">
+          <button
+            className={`${defaultNavClass} ${currentPage === PageTitle.candidate.applied ? "text-amber-400" : ""}`}
+            onClick={() => {
+              navigate("/candidate/applied");
+              dispatch(setCurrentPage(PageTitle.candidate.applied));
+            }}
+          >
             Applied
           </button>
         </div>

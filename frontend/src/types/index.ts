@@ -14,6 +14,11 @@ export const PageTitle = {
     payment: "Payment",
     setting: "Setting"
   },
+  candidate: {
+    jobs: "Jobs",
+    applied: "Applied"
+  }
 } as const;
 
 export type CompanyPageTitle = ObjectValues<typeof PageTitle.company>;
+export type CandidatePageTitle = ObjectValues<typeof PageTitle.candidate>;

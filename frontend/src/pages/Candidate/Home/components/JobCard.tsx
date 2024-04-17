@@ -5,7 +5,7 @@ export const JobCard = () => {
   return (
     <a
       href="#"
-      className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 px-4 py-2"
+      className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 px-4 py-2"
     >
       <img
         className="object-cover w-full rounded-t-lg h-16 md:h-20 md:w-20 md:rounded-none md:rounded-s-lg"
