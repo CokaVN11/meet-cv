@@ -7,7 +7,7 @@ import {
   Outlet,
   redirect,
 } from "react-router-dom";
-import { CandidateHome, StaffHome, Login, CompanyHome, CompanyLayout, CompanyPosition, CompanyProposal, CompanyEmployee, CompanyAddProposal } from "./pages";
+import { CandidateHome, StaffHome, Login, CompanyHome, CompanyLayout, CompanyPosition, CompanyProposal, CompanyEmployee, CompanyAddProposal, CandidateLayout } from "./pages";
 import "./App.css";
 import { useAppSelector } from "./libs/redux";
 import { useMemo } from "react";
@@ -21,6 +21,7 @@ const PrivateRoute = ({
 }) => {
   const layout = useMemo(() => {
     if (role === "company") return <CompanyLayout />;
+    if (role === "candidate") return <CandidateLayout />;
     return <Outlet />;
   }, [role]);
 
@@ -39,6 +40,7 @@ const App = () => {
         <Route path="/login" loader={loginLoader} element={<Login />} />
         <Route path="/candidate" element={<PrivateRoute role={role} />}>
           <Route path="" element={<CandidateHome />} index />
+
         </Route>
         <Route path="/staff" element={<PrivateRoute role={role} />}>
           <Route path="" element={<StaffHome />} index />
