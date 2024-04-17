@@ -9,34 +9,20 @@ import {
 import { visuallyHidden } from "@mui/utils";
 type Order = "asc" | "desc";
 
-interface EnhancedTableProps {
+interface EnhancedTableProps<T> {
   numSelected: number;
   onRequestSort: (
     event: React.MouseEvent<unknown>,
-    property: keyof ads
+    property: keyof T
   ) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   order: Order;
   orderBy: string;
   rowCount: number;
+  headCells: readonly HeadCell<T>[];
 }
 
-interface HeadCell {
-  disablePadding: boolean;
-  id: keyof ads;
-  label: string;
-  numeric: boolean;
-}
-
-const headCells: readonly HeadCell[] = [
-  { id: "position", numeric: false, disablePadding: true, label: "Position"},
-  { id: "quantity", numeric: true, disablePadding: false, label: "Quantity"},
-  { id: "endTime", numeric: true, disablePadding: false, label: "End date"},
-  { id: "adsForm", numeric: true, disablePadding: false, label: "Advertisement form"},
-  { id: "description", numeric: true, disablePadding: false, label: "Description"},
-];
-
-export const EnhancedTableHead = (props: EnhancedTableProps) => {
+export const EnhancedTableHead = <T, >(props: EnhancedTableProps<T>) => {
   const {
     onSelectAllClick,
     order,
@@ -44,9 +30,10 @@ export const EnhancedTableHead = (props: EnhancedTableProps) => {
     numSelected,
     rowCount,
     onRequestSort,
+    headCells
   } = props;
   const createSortHandler =
-    (property: keyof ads) => (event: React.MouseEvent<unknown>) => {
+    (property: keyof T) => (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
     };
 

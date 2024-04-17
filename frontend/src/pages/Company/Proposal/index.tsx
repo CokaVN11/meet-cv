@@ -1,30 +1,25 @@
 import { useEffect, useState } from "react";
-import { StatisticBar } from "./components";
 import { Subbar, CustomTable } from "../components";
 import mockData from "./mockData.json";
+import { useNavigate } from "react-router-dom";
 
-const headCells: readonly HeadCell<Ads>[] = [
+const headCells: readonly HeadCell<Proposal>[] = [
   { id: "position", numeric: false, disablePadding: true, label: "Position" },
   { id: "quantity", numeric: true, disablePadding: false, label: "Quantity" },
-  { id: "endTime", numeric: true, disablePadding: false, label: "End date" },
+  { id: "length", numeric: true, disablePadding: false, label: "Length"},
+  { id: "startDate", numeric: true, disablePadding: false, label: "Start date" },
   {
     id: "adsForm",
     numeric: true,
     disablePadding: false,
     label: "Advertisement form",
-  },
-  {
-    id: "description",
-    numeric: false,
-    disablePadding: false,
-    label: "Description",
-  },
+  }
 ];
 
-export const CompanyHome = () => {
-  const [rows, setRows] = useState<Ads[]>();
+export const CompanyProposal = () => {
+  const [rows, setRows] = useState<Proposal[]>();
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
   useEffect(() => {
     setRows(mockData);
     setLoading(false);
@@ -32,8 +27,7 @@ export const CompanyHome = () => {
 
   return (
     <div className="px-10 flex flex-col">
-      <StatisticBar />
-      <Subbar label="Your hiring positions"/>
+      <Subbar label="Your advertising proposal" onClickHandler={() => navigate("/company/proposal/add")} />
       {loading ? (
         <div>Loading...</div>
       ) : (

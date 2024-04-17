@@ -7,9 +7,10 @@ import {
   Outlet,
   redirect,
 } from "react-router-dom";
-import { CandidateHome, StaffHome, CompanyHome, Login } from "./pages";
+import { CandidateHome, StaffHome, Login, CompanyHome, CompanyLayout, CompanyPosition, CompanyProposal, CompanyEmployee, CompanyAddProposal } from "./pages";
 import "./App.css";
 import { useAppSelector } from "./libs/redux";
+import { useMemo } from "react";
 
 const PrivateRoute = ({
   role,
@@ -18,15 +19,17 @@ const PrivateRoute = ({
   role: string | null;
   redirectPath?: string;
 }) => {
-  return role ? <Outlet /> : <Navigate to={redirectPath} replace />;
+  const layout = useMemo(() => {
+    if (role === "company") return <CompanyLayout />;
+    return <Outlet />;
+  }, [role]);
+
+  return role ? layout : <Navigate to={redirectPath} />;
 };
 
 const App = () => {
   const role = useAppSelector((state) => state.auth.role);
   const loginLoader = () => {
-    if (role === 'staff') return redirect('/staff');
-    if (role === 'company') return redirect('/company');
-    if (role === 'candidate') return redirect('/candidate');
     return role ? redirect('/' + role) : null;
   };
   const router = createBrowserRouter(
@@ -42,7 +45,14 @@ const App = () => {
         </Route>
         <Route path="/company" element={<PrivateRoute role={role} />}>
           <Route path="" element={<CompanyHome />} index />
+          <Route path="/company/position" element={<CompanyPosition />} />
+          <Route path="/company/proposal" element={<CompanyProposal />} />
+          <Route path="/company/proposal/add" element={<CompanyAddProposal />} />
+          <Route path="/company/employee" element={<CompanyEmployee />} />
+    
+          <Route path="*" element={<Navigate to="/company" />} />
         </Route>
+        <Route path="*" element={<Navigate to="/login" />} />
       </Route>
     )
   );
