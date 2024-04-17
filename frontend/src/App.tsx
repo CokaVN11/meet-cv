@@ -7,7 +7,7 @@ import {
   Outlet,
   redirect,
 } from "react-router-dom";
-import { CandidateHome, StaffHome, Login, CompanyHome, CompanyLayout, CompanyPosition, CompanyProposal, CompanyEmployee } from "./pages";
+import { CandidateHome, StaffHome, Login, CompanyHome, CompanyLayout, CompanyPosition, CompanyProposal, CompanyEmployee, CompanyAddProposal } from "./pages";
 import "./App.css";
 import { useAppSelector } from "./libs/redux";
 import { useMemo } from "react";
@@ -47,6 +47,7 @@ const App = () => {
           <Route path="" element={<CompanyHome />} index />
           <Route path="/company/position" element={<CompanyPosition />} />
           <Route path="/company/proposal" element={<CompanyProposal />} />
+          <Route path="/company/proposal/add" element={<CompanyAddProposal />} />
           <Route path="/company/employee" element={<CompanyEmployee />} />
     
           <Route path="*" element={<Navigate to="/company" />} />
