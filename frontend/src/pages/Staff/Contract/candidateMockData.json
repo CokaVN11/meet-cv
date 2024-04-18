@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "John Doe",
+        "email": "johndoe@gmail.com",
+        "phone": "1234567890",
+        "resumeID": "RE082"
+    },
+    {
+        "id": 2,
+        "name": "Jane Doe",
+        "email": "janedoe@gmail.com",
+        "phone": "0987654321",
+        "resumeID": "RE083"
+    },
+    {
+        "id": 3,
+        "name": "John Smith",
+        "email": "johnsmith@gmail.com",
+        "phone": "1234567890",
+        "resumeID": "RE084"
+    },
+    {
+        "id": 4,
+        "name": "Jane Smith",
+        "email": "janesmit@yahoo.com",
+        "phone": "0987654321",
+        "resumeID": "RE085"
+    }
+]

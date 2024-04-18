@@ -20,7 +20,7 @@ export const StaffCompany = () => {
 
   return (
     <div className="px-10 flex flex-col">
-      <Subbar label="Companies" />
+      <Subbar label="Companies" txtAdd="CREATE NEW COMPANY" />
       {loading ? (
         <div>Loading...</div>
       ) : (

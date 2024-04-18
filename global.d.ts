@@ -38,8 +38,24 @@ type Company = {
   address: string;
 }
 
+type Contract = {
+  id: number;
+  companyName: string;
+  phone: string;
+  taxNumber: string;
+  position: string;
+  expiredDate: string;
+}
 
 interface RowWithId {
   id: number;
   status?: string;
+}
+
+type Candidate = {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  resumeID: string;
 }

@@ -22,7 +22,7 @@ interface EnhancedTableProps<T> {
   headCells: readonly HeadCell<T>[];
 }
 
-export const EnhancedTableHead = <T, >(props: EnhancedTableProps<T>) => {
+export const EnhancedTableHead = <T,>(props: EnhancedTableProps<T>) => {
   const {
     onSelectAllClick,
     order,
@@ -72,6 +72,7 @@ export const EnhancedTableHead = <T, >(props: EnhancedTableProps<T>) => {
             </TableSortLabel>
           </TableCell>
         ))}
+        <TableCell align="center">Actions</TableCell>
       </TableRow>
     </TableHead>
   );
