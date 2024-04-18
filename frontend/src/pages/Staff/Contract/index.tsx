@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Subbar, CustomTable } from "../components";
+import { Subbar, CustomTable } from "../../components";
 import mockData from "./mockData.json";
 import CandidateList from "./candidateList";
 

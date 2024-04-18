@@ -52,9 +52,11 @@ const App = () => {
         <Route path="/company" element={<PrivateRoute role={role} />}>
           <Route path="" element={<CompanyHome />} index />
           <Route path="/company/position" element={<CompanyPosition />} />
+          {/* <Route path="/company/payment" element={}></Route> */}
           <Route path="/company/proposal" element={<CompanyProposal />} />
           <Route path="/company/proposal/add" element={<CompanyAddProposal />} />
           <Route path="/company/employee" element={<CompanyEmployee />} />
+
 
           <Route path="*" element={<Navigate to="/company" />} />
         </Route>
