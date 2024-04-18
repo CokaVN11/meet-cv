@@ -30,6 +30,15 @@ type Proposal = {
   adsForm: string;
 }
 
+type Company = {
+  id: number;
+  name: string;
+  email: string;
+  taxNumber: string;
+  address: string;
+}
+
+
 interface RowWithId {
   id: number;
   status?: string;

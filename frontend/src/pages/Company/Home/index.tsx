@@ -33,7 +33,7 @@ export const CompanyHome = () => {
   return (
     <div className="px-10 flex flex-col">
       <StatisticBar />
-      <Subbar label="Your hiring positions"/>
+      <Subbar label="Your hiring positions" />
       {loading ? (
         <div>Loading...</div>
       ) : (
