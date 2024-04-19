@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom"
-import { Headerbar, Sidebar } from "../../components"
+import { Sidebar } from "../components/Sidebar"
+import { Headerbar } from "../../components"
 import { FC } from "react"
 
 export const StaffLayout: FC = () => {

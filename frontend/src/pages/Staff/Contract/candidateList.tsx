@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Subbar, CustomTable } from "../../components";
+import { CustomTable } from "../../components";
 import mockData from "./candidateMockData.json";
 
 const headCells: readonly HeadCell<Candidate>[] = [
@@ -9,7 +9,7 @@ const headCells: readonly HeadCell<Candidate>[] = [
     { id: "resumeID", numeric: true, disablePadding: false, label: "Resume ID" },
 ];
 
-const CandidateList = () => {
+const StaffCandidateList = () => {
     const [rows, setRows] = useState<Candidate[]>();
     const [loading, setLoading] = useState(true);
 
@@ -29,4 +29,4 @@ const CandidateList = () => {
     );
 }
 
-export default CandidateList;
+export default StaffCandidateList;

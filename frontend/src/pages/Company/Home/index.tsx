@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { StatisticBar } from "./components";
-import { Subbar, CustomTable } from "../components";
+import { Subbar, CustomTable } from "../../components";
 import mockData from "./mockData.json";
 
 const headCells: readonly HeadCell<Ads>[] = [
@@ -33,7 +33,7 @@ export const CompanyHome = () => {
   return (
     <div className="px-10 flex flex-col">
       <StatisticBar />
-      <Subbar label="Your hiring positions" />
+      <Subbar label="Your hiring positions" txtAdd="ADD NEW POSITION" />
       {loading ? (
         <div>Loading...</div>
       ) : (

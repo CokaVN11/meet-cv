@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Subbar, CustomTable } from "../../components";
 import mockData from "./mockData.json";
-import CandidateList from "./candidateList";
+import StaffCandidateList from "./candidateList";
 
 const headCells: readonly HeadCell<Contract>[] = [
     { id: "companyName", numeric: false, disablePadding: true, label: "Name" },
@@ -31,4 +31,4 @@ const StaffContract = () => {
     );
 }
 
-export { CandidateList, StaffContract };
+export { StaffCandidateList, StaffContract };

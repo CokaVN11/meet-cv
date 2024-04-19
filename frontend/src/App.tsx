@@ -7,7 +7,9 @@ import {
   Outlet,
   redirect,
 } from "react-router-dom";
-import { CandidateHome, CandidateList, StaffCompany, StaffContract, StaffLayout, StaffReport, Login, CompanyHome, CompanyLayout, CompanyPosition, CompanyProposal, CompanyEmployee, CompanyAddProposal } from "./pages";
+import { CandidateHome, Login, } from "./pages";
+import { CompanyPayment, CompanyHome, CompanyLayout, CompanyPosition, CompanyProposal, CompanyEmployee, CompanyAddProposal } from "./pages/Company";
+import { StaffCandidateList, StaffCompany, StaffContract, StaffLayout, StaffReport } from "./pages/Staff";
 import "./App.css";
 import { useAppSelector } from "./libs/redux";
 import { useMemo } from "react";
@@ -47,12 +49,12 @@ const App = () => {
           <Route path="" element={<StaffCompany />} index />
           <Route path="/staff/contract" element={<StaffContract />} />
           <Route path="/staff/report" element={<StaffReport />} />
-          <Route path="/staff/contract/:id" element={<CandidateList />} />
+          <Route path="/staff/contract/:id" element={<StaffCandidateList />} />
         </Route >
         <Route path="/company" element={<PrivateRoute role={role} />}>
           <Route path="" element={<CompanyHome />} index />
           <Route path="/company/position" element={<CompanyPosition />} />
-          {/* <Route path="/company/payment" element={}></Route> */}
+          <Route path="/company/payment" element={<CompanyPayment />}></Route>
           <Route path="/company/proposal" element={<CompanyProposal />} />
           <Route path="/company/proposal/add" element={<CompanyAddProposal />} />
           <Route path="/company/employee" element={<CompanyEmployee />} />
