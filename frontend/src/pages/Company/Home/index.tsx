@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
 import { StatisticBar } from "./components";
-import { Subbar, CustomTable } from "../components";
-import mockData from "./mockData.json";
 
 const headCells: readonly HeadCell<Ads>[] = [
   { id: "position", numeric: false, disablePadding: true, label: "Position" },
@@ -22,23 +19,9 @@ const headCells: readonly HeadCell<Ads>[] = [
 ];
 
 export const CompanyHome = () => {
-  const [rows, setRows] = useState<Ads[]>();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setRows(mockData);
-    setLoading(false);
-  }, []);
-
   return (
     <div className="px-10 flex flex-col">
       <StatisticBar />
-      <Subbar label="Your hiring positions"/>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <CustomTable rows={rows ?? []} headCells={headCells} />
-      )}
     </div>
   );
 };
