@@ -1,53 +1,16 @@
 import {
   BuildingOffice2Icon,
   Cog6ToothIcon,
-  DocumentTextIcon,
   DocumentChartBarIcon,
+  DocumentTextIcon,
 } from "@heroicons/react/24/outline";
-import { useAppDispatch, useAppSelector } from "libs/redux";
-import { clearAuth } from "libs/redux/sliceAuth";
-import { setCurrentPage } from "libs/redux/sliceCompany";
+import { useAppSelector } from "libs/redux";
 import { LogoutButton } from "pages/components";
-import { useNavigate } from "react-router-dom";
-import { CompanyPageTitle } from "types/index";
-
-const SidebarButton = ({
-  icon,
-  text,
-  active = false,
-  nextPath
-}: {
-  icon: React.ReactNode;
-  text: string;
-  active?: boolean;
-  nextPath?: string;
-}) => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const onClickHandler = () => {
-    if (text === "Log out") {
-      dispatch(clearAuth());
-    }
-    else {
-      dispatch(setCurrentPage(text as CompanyPageTitle));
-      if (nextPath) {
-        navigate(nextPath);
-      }
-    }
-  }
-  return (
-    <button className={`${active ? 'bg-amber-500 text-white hover:bg-amber-500' : 'bg-transparent'} w-full hover:bg-amber-400 flex justify-start gap-2 items-center hover:border-amber-400 focus:outline-none focus:ring-amber-500 font-medium text-sm`} onClick={onClickHandler}>
-      {icon}
-      {text}
-    </button>
-  );
-};
+import { SidebarButton } from "pages/components";
 
 export const Sidebar = () => {
   const currentPage = useAppSelector((state) => state.company.currentPage);
   const options = [
-    // { text: "Home", path: "/company", icon: <HomeIcon className="h-5 w-5 me-1"></HomeIcon> },
-    // { text: "Position", path: "/company/position", icon: <UserIcon className="h-5 w-5 me-1"></UserIcon> },
     { text: "Company", path: "/staff/company", icon: <BuildingOffice2Icon className="h-5 w-5 me-1"></BuildingOffice2Icon> },
     { text: "Contract", path: "/staff/contract", icon: <DocumentTextIcon className="h-5 w-5 me-1"></DocumentTextIcon> },
     { text: "Report", path: "/staff/report", icon: <DocumentChartBarIcon className="h-5 w-5 me-1"></DocumentChartBarIcon> },
