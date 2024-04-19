@@ -20,6 +20,16 @@ type Ads = {
   description: string;
 }
 
+type Payment = {
+  id: number;
+  posName: string;
+  adsForm: string;
+  contractLength: number;
+  paid: number;
+  total: number;
+  method: string;
+}
+
 type Proposal = {
   status: string;
   id: number;
