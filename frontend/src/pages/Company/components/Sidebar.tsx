@@ -6,44 +6,8 @@ import {
   UserGroupIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import { useAppDispatch, useAppSelector } from "libs/redux";
-import { clearAuth } from "libs/redux/sliceAuth";
-import { setCurrentPage } from "libs/redux/sliceCompany";
-import { LogoutButton } from "pages/components";
-import { useNavigate } from "react-router-dom";
-import { CompanyPageTitle } from "types/index";
-
-const SidebarButton = ({
-  icon,
-  text,
-  active = false,
-  nextPath
-}: {
-  icon: React.ReactNode;
-  text: string;
-  active?: boolean;
-  nextPath?: string;
-}) => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const onClickHandler = () => {
-    if (text === "Log out") {
-      dispatch(clearAuth());
-    }
-    else {
-      dispatch(setCurrentPage(text as CompanyPageTitle));
-      if (nextPath) {
-        navigate(nextPath);
-      }
-    }
-  }
-  return (
-    <button className={`${active ? 'bg-amber-500 text-white hover:bg-amber-500': 'bg-transparent'} w-full hover:bg-amber-400 flex justify-start gap-2 items-center hover:border-amber-400 focus:outline-none focus:ring-amber-500 font-medium text-sm rounded-lg`} onClick={onClickHandler}>
-      {icon}
-      {text}
-    </button>
-  );
-};
+import { useAppSelector } from "libs/redux";
+import { LogoutButton, SidebarButton } from "pages/components";
 
 export const Sidebar = () => {
   const currentPage = useAppSelector((state) => state.company.currentPage);

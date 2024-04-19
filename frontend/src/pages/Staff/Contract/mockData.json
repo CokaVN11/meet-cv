@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "companyName": "Apple",
+        "phone": "408-996-1010",
+        "taxNumber": "9424014110",
+        "position": "CEO",
+        "expiredDate": "2021-12-31",
+        "status": 1
+    },
+    {
+        "id": 2,
+        "companyName": "Google",
+        "phone": "650-253-0000",
+        "taxNumber": "9424014111",
+        "position": "CEO",
+        "expiredDate": "2021-12-31",
+        "status": 1
+    },
+    {
+        "id": 3,
+        "companyName": "Facebook",
+        "phone": "650-543-4800",
+        "taxNumber": "9424014112",
+        "position": "CEO",
+        "expiredDate": "2021-12-31",
+        "status": 2
+    },
+    {
+        "id": 4,
+        "companyName": "Amazon",
+        "phone": "206-266-1000",
+        "taxNumber": "9424014113",
+        "position": "CEO",
+        "expiredDate": "2021-12-31",
+        "status": 2
+    },
+    {
+        "id": 5,
+        "companyName": "Microsoft",
+        "phone": "425-882-8080",
+        "taxNumber": "9424014114",
+        "position": "CEO",
+        "expiredDate": "2021-12-31",
+        "status": 2
+    }
+]

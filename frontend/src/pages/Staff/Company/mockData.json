@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "Coca Cola",
+        "email": "coca@gmail.com",
+        "taxNumber": "123456789",
+        "address": "Istanbul"
+    },
+    {
+        "id": 2,
+        "name": "Pepsi",
+        "email": "pepsi@gmail.com",
+        "taxNumber": "987654321",
+        "address": "Istanbul"
+    },
+    {
+        "id": 3,
+        "name": "Fanta",
+        "email": "fantaisme@gmail.com",
+        "taxNumber": "123456789",
+        "address": "Istanbul"
+    },
+    {
+        "id": 4,
+        "name": "Sprite",
+        "email": "sprite@yahoo.com",
+        "taxNumber": "987654321",
+        "address": "Istanbul"
+    }
+]

@@ -7,7 +7,9 @@ import {
   Outlet,
   redirect,
 } from "react-router-dom";
-import { CandidateHome, StaffHome, Login, CompanyHome, CompanyLayout, CompanyPosition, CompanyProposal, CompanyEmployee, CompanyAddProposal, CandidateLayout } from "./pages";
+import { CandidateHome, Login, } from "./pages";
+import { CompanyPayment, CompanyHome, CompanyLayout, CompanyPosition, CompanyProposal, CompanyEmployee, CompanyAddProposal } from "./pages/Company";
+import { StaffCandidateList, StaffCompany, StaffContract, StaffLayout, StaffReport } from "./pages/Staff";
 import "./App.css";
 import { useAppSelector } from "./libs/redux";
 import { useMemo } from "react";
@@ -22,7 +24,7 @@ const PrivateRoute = ({
 }) => {
   const layout = useMemo(() => {
     if (role === "company") return <CompanyLayout />;
-    if (role === "candidate") return <CandidateLayout />;
+    if (role === "staff") return <StaffLayout />;
     return <Outlet />;
   }, [role]);
 
@@ -44,20 +46,24 @@ const App = () => {
           <Route path="/candidate/applied" element={<CandidateApplied />} />
         </Route>
         <Route path="/staff" element={<PrivateRoute role={role} />}>
-          <Route path="" element={<StaffHome />} index />
-          
-        </Route>
+          <Route path="" element={<StaffCompany />} index />
+          <Route path="/staff/contract" element={<StaffContract />} />
+          <Route path="/staff/report" element={<StaffReport />} />
+          <Route path="/staff/contract/:id" element={<StaffCandidateList />} />
+        </Route >
         <Route path="/company" element={<PrivateRoute role={role} />}>
           <Route path="" element={<CompanyHome />} index />
           <Route path="/company/position" element={<CompanyPosition />} />
+          <Route path="/company/payment" element={<CompanyPayment />}></Route>
           <Route path="/company/proposal" element={<CompanyProposal />} />
           <Route path="/company/proposal/add" element={<CompanyAddProposal />} />
           <Route path="/company/employee" element={<CompanyEmployee />} />
-    
+
+
           <Route path="*" element={<Navigate to="/company" />} />
         </Route>
         <Route path="*" element={<Navigate to="/login" />} />
-      </Route>
+      </Route >
     )
   );
 

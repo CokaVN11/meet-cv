@@ -24,11 +24,6 @@ export const CustomRow = <T extends RowWithId>({
       key={row.id}
       selected={isSelected}
       sx={{ cursor: "pointer" }}
-      className={
-        row?.status === "active"
-          ? "bg-green-100 hover:!bg-green-200"
-          : "bg-red-100 hover:!bg-red-200"
-      }
     >
       <TableCell padding="checkbox">
         <Checkbox
@@ -56,6 +51,7 @@ export const CustomRow = <T extends RowWithId>({
           <TrashIcon className="h-5 w-5"></TrashIcon>
         </button>
       </TableCell>
+      
     </TableRow>
   );
 };

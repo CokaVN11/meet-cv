@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Subbar, CustomTable } from "../components";
+import { Subbar, CustomTable } from "../../components";
 import mockData from "./mockData.json";
 import { useNavigate } from "react-router-dom";
 
@@ -27,7 +27,7 @@ export const CompanyProposal = () => {
 
   return (
     <div className="px-10 flex flex-col">
-      <Subbar label="Your advertising proposal" onClickHandler={() => navigate("/company/proposal/add")} />
+      <Subbar label="Your advertising proposal" txtAdd="ADD NEW PROPOSAL" onClickHandler={() => navigate("/company/proposal/add")} />
       {loading ? (
         <div>Loading...</div>
       ) : (
